@@ -10,6 +10,7 @@ import platform
 import pickle
 import socket
 import struct
+import sys
 import time
 import random
 
@@ -382,8 +383,9 @@ class GraphiteClient(object):
         Given a message send it to the graphite server.
         """
         # Python 3 support
-        if type(message) == bytes:
-            message = str(message, 'utf-8')
+        if sys.version_info >= (3, 0):
+            if type(message) == bytes:
+                message = str(message, 'utf-8')
 
         self.socket.sendall(message.encode("ascii"))
 
