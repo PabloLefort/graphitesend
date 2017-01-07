@@ -288,9 +288,8 @@ class GraphiteClient(object):
         Given a message send it to the graphite server.
         """
         # Python 3 support
-        if sys.version_info >= (3, 0):
-            if type(message) == bytes:
-                message = str(message, 'utf-8')
+        if sys.version_info >= (3, 0) and type(message) == bytes:
+            message = str(message, 'utf-8')
 
         self.socket.sendall(message.encode("ascii"))
 
